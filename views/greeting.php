@@ -10,7 +10,7 @@
 
               $regExpLogin = '/^\w{4,15}$/';
               $regExpPass  = '/^[a-zA-Z0-9]{7,}$/';
-              $regExpEmail = '/^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/';
+              $regExpEmail = '/^[a-zA-Z0-9-_\-.]+@[a-zA-Z0-9]+\.[a-zA-Z]+$/';
               $regInf      = '/([a-zA-Z0-9]{7,})?/';
               $login       = $_POST['username'];
               $email       = $_POST['email'];
@@ -43,12 +43,12 @@
 
               if ( !preg_match($regExpLogin, $login) )
               {
-                $errors[] = "Логін повинен містити символи";
+                $errors[] = "Логін повинен містити символи і довжину не менше 4 символи та не більше 15 символів";
               }
 
               if ( !preg_match($regExpEmail, $email) )
               {
-                $errors[] = "Bad email!";
+                $errors[] = "Пошта введена не вірно";
               }
 
               if ( !preg_match($regExpPass, $password) )
