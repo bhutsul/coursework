@@ -12,7 +12,6 @@
     $checkLikeUser = mysqli_query($link,"SELECT  * FROM likepost where id_post = '$idPost' AND login_user = '$loginUser'");
     $rowCheckLike = mysqli_fetch_assoc($checkLikeUser); 
 
-
     if($numRowsId == 0)
     {
       echo '<div align = "center" style = "margin:15%;"><span style = "color: black ; font-size: 5.0vw;">Ця сторінка не доступна</span></div>';
@@ -25,8 +24,9 @@
       if( isset($_POST['addComment']) )//добавлення коментарів
       {
         $errorsComment = [];
+
         $regComment = '/(([a-zA-Z0-9]{4,255})|([а-яё0-9]{4,255})|([абвгґдеєжзиіїйклмнопрстуфхцчшщьюяы0-9]{4,255}))/';//ДОРОБИТИ
-        $comment = $_POST['comment'];
+        $comment    = $_POST['comment'];
 
         if ( !preg_match($regComment, $comment) )
         {
@@ -93,7 +93,7 @@
       } 
 
   echo '<div class = "d-flex flex-wrap justify-content-around">
-           <div class = "d-flex flex-column" style = "max-width: 50%">
+            <div class = "d-flex flex-column" style = "max-width: 50%">
                 <img src = "./fotoPost/'.$rowFotoName['image_name'].'"  style = "margin-top: 20px; object-fit: contain; height: 450px; max-width: 100%" >
                 <div  class = "d-flex flex-row justify-content-between">
                     <div onclick = "show(\'none\')" id = "wrap"></div>
@@ -120,7 +120,7 @@
                                 }
                       echo '</div>
                         </div>
-                    <div  class = "d-flex flex-row">'; 
+                        <div  class = "d-flex flex-row">'; 
                                
                             //для виводу кількості лайків під постом
                             $getNumLike =  mysqli_query($link, "SELECT * FROM likepost where id_post = '$idPost'");
@@ -159,7 +159,7 @@
                   $queryDeleteComment = "DELETE FROM comments WHERE id_comments = '$comment'";
                   $deleteComment = mysqli_query($link, $queryDeleteComment) or die("Помилка " . mysqli_error($link));
                 }
-            }
+              }
     echo' </div>
           <form action = "" class = "d-flex flex-column align-items-center" method = "POST" name = "addComment">
               <span class = "no_hightlight">Коментарій</span>
@@ -167,6 +167,6 @@
               <input id = "button_register"  name = "addComment" type = "submit" value = "Добавити">
           </form>
       </div>
-  </div>';
+    </div>';
     }
 ?>

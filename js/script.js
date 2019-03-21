@@ -17,20 +17,20 @@ function show(state, id)
 $(document).ready(function() {
   $(".like").bind("click", function() {
   	var classNameLike = $('#like').attr('class');
-  	var number = $('#counter').html();
-  	var classNameDislike = $('#dislike').attr('class');
+    var number = $('#counter').html();
+    var classNameDislike = $('#dislike').attr('class');
     var status = 0;
 
-  	if (classNameLike == "like" || classNameDislike == "like")
-  	{
+    if (classNameLike == "like" || classNameDislike == "like")
+    {
       number++;
       $('#counter').html(number);
     }
-	if (classNameLike == "like active" || classNameDislike == "like active")
-	{
-    number--;
-    $('#counter').html(number);
-  }
+    if (classNameLike == "like active" || classNameDislike == "like active")
+    {
+      number--;
+      $('#counter').html(number);
+    }
     $.ajax({
         type: "POST",
         url: '',
@@ -39,25 +39,25 @@ $(document).ready(function() {
         },
         success: function(data) 
         {
-	      if (!data.error)
-	      { 
-		    $('#like').toggleClass("active");
-		    $('#dislike').toggleClass("active");
-	      }
-	      else
-	      {
-		      alert("error");
-	      }
-	    }
+        if (!data.error)
+        { 
+          $('#like').toggleClass("active");
+          $('#dislike').toggleClass("active");
+        }
+        else
+        {
+          alert("error");
+        }
+      }
     });
   });
 });
 
 $(document).ready(function() {
   $(".deleteComment").bind("click", function() {
-  	var link = $(this);
-  	if (confirm("Ви дійсно бажаєте видалити коментарій?")) 
-  	{
+    var link = $(this);
+    if (confirm("Ви дійсно бажаєте видалити коментарій?")) 
+    {
       var idDeleteComment = link.attr('id');
       parseInt(idDeleteComment,10);
     }
@@ -69,15 +69,15 @@ $(document).ready(function() {
         },
         success: function(data) 
         {
-	      if (!data.error)
-	      { 
-	      	location.reload(true);
-	      }
-	      else
+          if (!data.error)
+	        { 
+	      	  location.reload(true);
+          }
+        else
 	      {
-		      alert("error");
-	      }
-	    }
+          alert("error");
+        }
+      }
     });
   });
 });
@@ -123,15 +123,15 @@ $(document).ready(function() {
         },
         success: function(data) 
         {
-        if (!data.error)
-        { 
-          window.location = '';
+          if (!data.error)
+          { 
+            window.location = '';
+          }
+          else
+          {
+            alert("error");
+          }
         }
-        else
-        {
-          alert("error");
-        }
-      }
     });
   });
 });
