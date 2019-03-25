@@ -207,7 +207,7 @@
 
      echo  '<div style = "margin-top: 20px;">
                 <a href = "index.php?action=viewpost&idPost='.$idFoto.'" >
-                  <img src = "./fotoPost/'.$rowFoto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
+                  <img src = "./fotopost/'.$rowFoto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
                 </a>
             </div>';
           }

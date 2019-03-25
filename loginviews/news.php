@@ -31,7 +31,7 @@
                   <span style = "font-size: 2vmin; opacity: 0.6;">'.$infFollow['date_post'].'</span>
               </div>
               <a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
-              <img src = "./fotoPost/'.$infFollow['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">
+              <img src = "./fotopost/'.$infFollow['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">
               </a>
               ';
             }

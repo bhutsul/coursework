@@ -73,7 +73,7 @@
       }
   echo '<div class = "d-flex flex-wrap justify-content-around">
             <div class = "d-flex flex-column " style = "max-width: 50%">';
-         echo  '<img src = "./fotoPost/'.$rowImageNamePost['image_name'].'"  style = "margin-top: 20px; object-fit: contain; height: 450px; max-width: 100%">    
+         echo  '<img src = "./fotopost/'.$rowImageNamePost['image_name'].'"  style = "margin-top: 20px; object-fit: contain; height: 450px; max-width: 100%">    
                 <div class = "d-flex flex-row">
                     <div onclick = "show(\'none\')" id = "wrap"></div>
                     <div id = "window7" class = "users_like">
@@ -104,12 +104,12 @@
 
                         if ( empty($rowUserLike) )
                         {
-                          echo '<div id = "like" class = "like"></div>';
+                          echo '<button class = "like" id = "like"></button>';
                         }
                         else
                         {
-                          echo '<div id = "dislike" class = "like active"></div>';
-                        }      
+                          echo '<button class = "like active" id = "dislike"></button>';
+                        }     
                         echo '<span style = "margin-top:10px;">Вподобали:</span><div onclick = "show(\'block\',\'7\')"  style = "width: 10px; height: 10px; margin-top: 10px; "><span id = "counter" class = "no_hightlight">'.$numRows.'</span></div>';
           echo' </div>
             </div>
