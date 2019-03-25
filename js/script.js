@@ -136,6 +136,36 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function() {
+  $(".follow").bind("click", function() {
+    var classNameFollow = $('#follow').attr('class');
+    var classNameUnfollow = $('#unfollow').attr('class');
+
+    var follow = 1;
+
+    $.ajax({
+        type: "POST",
+        url: '',
+        data: {
+          follow:follow
+        },
+        success: function(data) 
+        {
+          if (!data.error)
+          { 
+            $('#follow').toggleClass("active");
+            $('#unfollow').toggleClass("active");
+            window.location = '';
+          }
+          else
+          {
+            alert("error");
+          }
+        }
+    });
+  });
+});
+
 if ( window.history.replaceState ) 
 {
   window.history.replaceState( null, null, window.location.href );
