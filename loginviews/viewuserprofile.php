@@ -53,11 +53,20 @@
                          $rowLoginUser = mysqli_fetch_assoc($getLoginUser);
 
                          echo $rowLoginUser['login'];
-              echo '</span>
-                    <form method = "POST" name = "follow" >      
-                         <input type = "submit" id = "button_subscribe" name = "follow" class = "gradient" value = "Підписатись">
-                    </form>
-                    <div class = "d-flex flex-row">
+              echo '</span>';
+
+                    $queryCheckUserFollow = mysqli_query($link,"SELECT  * FROM followers where id_follower = '$idFollower'");
+                    $rowUserFollow = mysqli_fetch_assoc($queryCheckUserFollow);  
+
+                    if ( empty($rowUserFollow) )
+                    {
+                      echo '<button class = "gradient follow" id = "follow">Підписатись</button>';
+                    }
+                    else
+                    {
+                      echo '<button class = "gradient follow active" id = "unfollow">Відписатись</button>';
+                    }  
+              echo '<div class = "d-flex flex-row">
                         <div id = "subscriptions" class = "d-flex flex-row">
                             <span class = "no_hightlight" style = "font-size: 2.8vmin; opacity: 0.6;">Підписки: </span>';
                                  $loginUser = $rowLoginUser['login'];        
@@ -72,7 +81,7 @@
                                  $queryNumFollowers = mysqli_query($link,"SELECT  * FROM followers where id_user_follow = '$idUser'");
                                  $numFollowers = mysqli_num_rows($queryNumFollowers);
 
-                           echo '<div onclick = "show(\'block\',\'7\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;">' .$numFollowers.'</div>';	
+                           echo '<div onclick = "show(\'block\',\'7\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;" id = "numFollowers">' .$numFollowers.'</div>';	
                   echo '</div>
                     </div>
                 </div>
@@ -121,7 +130,7 @@
                   $idFoto = $rowFotoInf['image_id'];
 
            echo  '<a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
-                    <img src = "./fotoPost/'.$rowFotoInf['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
+                    <img src = "./fotopost/'.$rowFotoInf['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
                   </a>';
                 }
       echo '</div>';
