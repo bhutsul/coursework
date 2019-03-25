@@ -147,12 +147,13 @@
 
               while ( $rowCommentInformation = mysqli_fetch_assoc($getComment) )
               {
+                $deleteButtonId = $rowCommentInformation['id_comments'];
                 echo '<span class = "mr-auto" style = "font-size: 2.5vmin;">'.$rowCommentInformation['login_users'].'</span>';
                 echo '<div style = "white-space: pre-wrap; font-size: 2.5vmin; width: 200px; height:auto;">'.$rowCommentInformation['comment'].'</div>';
                 echo '<span style = "color: black ; font-size: 1.5vmin" class = "ml-auto">'.$rowCommentInformation['datetime'].'</span>';
-                echo '<div class = "deleteComment ml-auto" style = "font-size: 2vmin;" id = "'.$rowCommentInformation['id_comments'].'">Видалити</div>';
+                echo '<div class = "deleteComment ml-auto" style = "font-size: 2vmin;" id = "'.$deleteButtonId.'">Видалити</div>';
 
-                if ( isset( $_POST['idDeleteComment'] ) )
+                if ( isset( $_POST['idDeleteComment'] ) && ( $_POST['idDeleteComment'] == $deleteButtonId ))
                 {
                   $comment = $_POST['idDeleteComment'];
 
