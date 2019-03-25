@@ -215,6 +215,7 @@ a:visited {
 	height:40px;
 	cursor:pointer;
 	position:relative;
+	border: none;
 }
 
 .counterClick{
@@ -228,6 +229,19 @@ a:visited {
 
 .like.active, .like:hover{
 	background: url('../img/like_active.png') no-repeat;
+	background-size: cover;
+}
+
+.follow{
+	position:relative;
+	border: none;
+}
+
+.follow:hover.active, .follow{
+	background-size: cover;
+}
+
+.follow.active, .follow:hover{
 	background-size: cover;
 }
 
