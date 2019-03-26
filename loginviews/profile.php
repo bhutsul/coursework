@@ -89,7 +89,7 @@
 <div  class = "d-flex flex-row justify-content-center" style = "padding-bottom: 20px; border-bottom: 1px solid silver;">
     <div style = "margin-right: 5%;">
         <?php
-            $getAvatar = mysqli_query($link, "SELECT * FROM avatars where user_id = '$id'");//запит для виводу аватарки
+            $getAvatar = mysqli_query($link, "SELECT image_name FROM avatars where user_id = '$id'");//запит для виводу аватарки
             $rowAvatar = mysqli_fetch_assoc($getAvatar);  
 
             if (!$rowAvatar)
@@ -112,7 +112,7 @@
             <div class = "d-flex flex-row followers">
                 <span class = "no_hightlight" style = "font-size: 2.8vmin;">Підписки: </span>
                      <?php
-                         $getFollow = mysqli_query($link, "SELECT  * FROM followers where login_follower = '$login'");
+                         $getFollow = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$id'");
                          $numFollow = mysqli_num_rows($getFollow);
 
                          echo '<div onclick = "show(\'block\',\'6\')" style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollow.'</div>';
@@ -121,7 +121,7 @@
             <div class = "d-flex flex-row followers">
                 <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin;">Підписники: </span>
                      <?php
-                         $getFollowers = mysqli_query($link, "SELECT  * FROM followers where id_user_follow = '$id'");
+                         $getFollowers = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$id'");
                          $numFollowers = mysqli_num_rows($getFollowers);
 
                          echo '<div onclick = "show(\'block\',\'5\')" style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollowers.'</div>';
@@ -171,7 +171,7 @@
         <?php
             while ( $rowFollowers = mysqli_fetch_assoc($getFollowers) ) 
             {
-              echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollowers['id_follower'].'" >'.$rowFollowers['login_follower'].'</a></div>';
+              echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollowers['id_follower'].'" >'.$rowFollowers['login'].'</a></div>';
             }
         ?>
     </div>
@@ -183,7 +183,7 @@
         <?php
             while ( $rowFollow = mysqli_fetch_assoc($getFollow) ) 
             {
-              echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollow['id_user_follow'].'" >'.$rowFollow['login_user_follow'].'</a></div>';
+              echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollow['id_user_follow'].'" >'.$rowFollow['login'].'</a></div>';
             }
         ?>
     </div>
@@ -191,7 +191,7 @@
 
 <div class = "d-flex flex-row flex-wrap justify-content-around">
     <?php
-        $getFoto = mysqli_query($link, "SELECT * FROM imggallery where iduser = '$id' LIMIT 6");
+        $getFoto = mysqli_query($link, "SELECT image_name, image_id FROM imggallery where iduser = '$id' LIMIT 6");
         $numFoto = mysqli_num_rows($getFoto);
 
         if ($numFoto == 0)

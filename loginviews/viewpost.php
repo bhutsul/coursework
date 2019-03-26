@@ -5,11 +5,11 @@
     $idUser    = $_SESSION['id'];
 
     //провірка чи існує пост
-    $queryCheckPost =  mysqli_query($link, "SELECT image_id FROM imggallery WHERE image_id = '$idPost' AND login_user = '$loginUser'");
+    $queryCheckPost =  mysqli_query($link, "SELECT image_id FROM imggallery WHERE image_id = '$idPost' AND iduser = '$idUser'");
     $numRowsId = mysqli_num_rows($queryCheckPost);
 
     //для провірки чи існує лайк користувача  в сесії
-    $checkLikeUser = mysqli_query($link,"SELECT  * FROM likepost where id_post = '$idPost' AND login_user = '$loginUser'");
+    $checkLikeUser = mysqli_query($link,"SELECT  * FROM likepost where id_post = '$idPost' AND id_user = '$idUser'");
     $rowCheckLike = mysqli_fetch_assoc($checkLikeUser); 
 
     if($numRowsId == 0)
@@ -60,14 +60,14 @@
       if ( isset( $_POST['status'] ) )
       {
 
-        if ( empty( $rowCheckLike['login_user'] ) || ($rowCheckLike['login_user'] != $loginUser) )
+        if ( empty( $rowCheckLike['id_user'] ) || ($rowCheckLike['id_user'] != $idUser) )
         {
-          $sql = "INSERT INTO likepost(`login_user`,`id_user`,`id_post`) VALUES ('$loginUser','$idUser','$idPost')";
+          $sql = "INSERT INTO likepost(`id_user`,`id_post`) VALUES ('$idUser','$idPost')";
           $result = mysqli_query($link, $sql) or die("Помилка " . mysqli_error($link));;
         }
         else
         {
-          $sql = "DELETE FROM likepost WHERE login_user = '$loginUser' AND id_post = '$idPost'";
+          $sql = "DELETE FROM likepost WHERE id_user = '$idUser' AND id_post = '$idPost'";
           $result = mysqli_query($link, $sql);
         }
       }
@@ -102,11 +102,11 @@
                             <div class = "d-flex flex-column view_users_like">';
 
                                 //для виводу тих хто лайкнув пост
-                                $getListUser = mysqli_query($link,"SELECT *  FROM likepost where id_post = '$idPost'");
+                                $getListUser = mysqli_query($link,"SELECT * FROM `likepost` INNER JOIN `users` ON likepost.id_user = users.id where id_post = '$idPost'");
 
                                 while ( $rowListUser = mysqli_fetch_assoc($getListUser) ) 
                                 {
-                                  $listUsers  = $rowListUser['login_user'];
+                                  $listUsers  = $rowListUser['login'];
                                   $idUserLike = $rowListUser['id_user'];
 
                                   if( $rowListUser['id_user'] == $_SESSION['id'] )

@@ -1,8 +1,8 @@
 <div class = "d-flex flex-column flex-wrap align-items-center">
     <?php
-        $login = $_SESSION['login']; 
+        $id = $_SESSION['id']; 
 
-        $getUserFollow = mysqli_query($link,"SELECT id_user_follow FROM followers where login_follower = '$login'");
+        $getUserFollow = mysqli_query($link,"SELECT id_user_follow FROM followers where id_follower = '$id'");
         $numNews = mysqli_num_rows($getUserFollow);
 
         if ($numNews == 0)
@@ -16,7 +16,7 @@
           {
             $idUserNews = $rowUserFollow['id_user_follow'];
 
-            $getInfFollow = mysqli_query($link,"SELECT image_name, image_id, login_user, date_post, iduser FROM imggallery where iduser = '$idUserNews'  ORDER BY UNIX_TIMESTAMP(date_post) DESC");
+            $getInfFollow = mysqli_query($link, "SELECT * FROM `imggallery` INNER JOIN users ON imggallery.iduser = users.id where iduser = '$idUserNews'  ORDER BY UNIX_TIMESTAMP(date_post) DESC");
 
             while ( $infFollow = mysqli_fetch_assoc($getInfFollow) )
             {
@@ -26,7 +26,7 @@
          echo '
               <div class = "d-flex flex-column">
                   <a href = "index.php?action=viewuserprofile&idUser='.$idUser.'" >
-                    <span style = "font-size: 4vmin; opacity: 0.6;">'.$infFollow['login_user'].'</span>
+                    <span style = "font-size: 4vmin; opacity: 0.6;">'.$infFollow['login'].'</span>
                   </a>
                   <span style = "font-size: 2vmin; opacity: 0.6;">'.$infFollow['date_post'].'</span>
               </div>

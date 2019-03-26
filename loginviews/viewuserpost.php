@@ -4,7 +4,7 @@
     $idUser    = $_SESSION['id'];
     
     //провірка чи існує пост
-    $checkPost = mysqli_query($link, "SELECT image_id FROM imggallery WHERE image_id = '$idPost' AND login_user != '$loginUser'");
+    $checkPost = mysqli_query($link, "SELECT image_id FROM imggallery WHERE image_id = '$idPost' AND iduser != '$idUser'");
     $numRowsId = mysqli_num_rows($checkPost);
 
     if($numRowsId == 0)
@@ -18,21 +18,21 @@
       $rowImageNamePost = mysqli_fetch_assoc($getImageNamePost);
 
       //для провірки чи існує лайк користувача  в сесії
-      $queryCheckUserLike = mysqli_query($link,"SELECT  * FROM likepost where id_post = '$idPost' AND login_user = '$loginUser'");
+      $queryCheckUserLike = mysqli_query($link,"SELECT  * FROM likepost where id_post = '$idPost' AND id_user = '$idUser'");
       $rowUserLike        = mysqli_fetch_assoc($queryCheckUserLike);
 
-      if ( isset( $_POST['status'] ) )//добавлееня лайка при кліку
+      if ( isset( $_POST['status'] ) )//добавлення лайка при кліку
       {
         $status = $_POST['status'];
 
-        if ( empty($rowUserLike['login_user']) || ($rowUserLike['login_user'] != $loginUser) )
+        if ( empty($rowUserLike['id_user']) || ($rowUserLike['id_user'] != $idUser) )
         {
-          $sql = "INSERT INTO likepost(`login_user`,`id_user`,`id_post`) VALUES ('$loginUser','$idUser','$idPost')";
+          $sql = "INSERT INTO likepost(`id_user`,`id_post`) VALUES ('$idUser','$idPost')";
           $result = mysqli_query($link, $sql) or die("Помилка " . mysqli_error($link));;
         }
         else
         {
-          $sql = "DELETE FROM likepost WHERE login_user = '$loginUser' AND id_post = '$idPost'";
+          $sql = "DELETE FROM likepost WHERE id_user = '$idUser' AND id_post = '$idPost'";
           $result = mysqli_query($link, $sql) or die("Помилка " . mysqli_error($link));;
         }
       }
@@ -80,11 +80,11 @@
                         <img class = "close" onclick = "show(\'none\')" src="./img/close.png" width = "20px" height = "20px">
                         <div class = "d-flex flex-column view_users_like">';
                                //для виводу тих хто лайкнув пост
-                               $postLikers = mysqli_query($link,"SELECT `login_user`,`id_user`  FROM likepost where id_post = '$idPost'");
+                               $postLikers = mysqli_query($link,"SELECT * FROM `likepost` INNER JOIN `users` ON likepost.id_user = users.id where id_post = '$idPost'");
 
                                while ( $rowPostLikers = mysqli_fetch_assoc($postLikers) ) 
                                {
-                                 $listUsers  = $rowPostLikers['login_user'];
+                                 $listUsers  = $rowPostLikers['login'];
                                  $idUserLike = $rowPostLikers['id_user'];
 
                                  if ( $rowPostLikers['id_user'] == $_SESSION['id'] )

@@ -15,70 +15,68 @@
     }
     else
     {
+      
+      $followUser = mysqli_query($link,"SELECT  * FROM followers where id_follower = '$idFollower' AND id_user_follow = '$idUser'");
+      $rowfollowUser = mysqli_fetch_assoc($followUser);
 
       if( isset( $_POST['follow'] ) )//підписка
       {
-        $followUser = mysqli_query($link,"SELECT  * FROM followers where login_follower = '$loginFollower' AND id_user_follow = '$idUser'");
-        $rowfollowUser = mysqli_fetch_assoc($followUser);
 
         if($rowfollowUser['id_user_follow'] != $idUser)
         {
-          $sql = "INSERT INTO followers(`id_user_follow`, `login_user_follow`, `login_follower`,`id_follower`) VALUES ('$idUser', '$loginFollow' ,'$loginFollower','$idFollower')";
+          $sql = "INSERT INTO followers(`id_user_follow`,`id_follower`) VALUES ('$idUser','$idFollower')";
           $result = mysqli_query($link, $sql);
         }
         else 
         {
-          $sql = "DELETE FROM followers WHERE login_follower = '$loginFollower' AND id_user_follow = '$idUser'";
+          $sql = "DELETE FROM followers WHERE id_follower = '$idFollower' AND id_user_follow = '$idUser'";
           $result = mysqli_query($link, $sql);
         }
-      }
+      }     
 
       echo '<div  class = "d-flex flex-row justify-content-center" style = "padding-bottom: 20px; border-bottom: 1px solid silver;">
                 <div id = "avatar" style = "margin-right: 5%;">';
-                    $getAvatarName = mysqli_query($link,"SELECT * FROM avatars where user_id = '$idUser'");//запит для виводу аватарки
-                    $rowAvatarName = mysqli_fetch_assoc($getAvatarName);
+                    //запит для виводу аватарки
+                    $getAvatar = mysqli_query($link, "SELECT image_name FROM avatars where user_id = '$idUser'");
+                    $rowAvatar = mysqli_fetch_assoc($getAvatar);  
 
-                    if (!$rowAvatarName)
+                    if (!$rowAvatar['image_name'])
                     {
                       echo  '<img src = "./avatars/noavatar.png " style = "height: 20vw; max-height:200px; max-width:200px; width: 20vw; margin-top: 20px; object-fit: cover;" class = "rounded-circle">';
                     }
                     else
                     {
-                      echo  '<img src = "./avatars/'.$rowAvatarName['image_name'].' " style = "height: 20vw; max-height:200px; max-width:200px; width: 20vw; margin-top: 20px; object-fit: cover;" class = "rounded-circle" >';
+                      echo  '<img src = "./avatars/'.$rowAvatar['image_name'].' " style = "height: 20vw; max-height:200px; max-width:200px; width: 20vw; margin-top: 20px; object-fit: cover;" class = "rounded-circle" >';
                     }
           echo '</div>
                 <div class = "d-flex flex-column justify-content-center align-items-start">
                     <span class = "no_hightlight" style = "font-size: 3vmax; opacity: 0.6;">';
-                         $getLoginUser = mysqli_query($link,"SELECT  `id`, `login` FROM users where id = '$idUser'");//для виводу логіна 
-                         $rowLoginUser = mysqli_fetch_assoc($getLoginUser);
+                         $getLogin = mysqli_query($link, "SELECT login FROM users where id = '$idUser'");
+                         $rowLogin = mysqli_fetch_assoc($getLogin); 
 
-                         echo $rowLoginUser['login'];
+                         echo $rowLogin['login'];
               echo '</span>';
 
-                    $queryCheckUserFollow = mysqli_query($link,"SELECT  * FROM followers where id_follower = '$idFollower'");
-                    $rowUserFollow = mysqli_fetch_assoc($queryCheckUserFollow);  
-
-                    if ( empty($rowUserFollow) )
+                    if ( empty($rowfollowUser) )
                     {
                       echo '<button class = "gradient follow" id = "follow">Підписатись</button>';
                     }
-                    else
+                    else 
                     {
                       echo '<button class = "gradient follow active" id = "unfollow">Відписатись</button>';
                     }  
+
               echo '<div class = "d-flex flex-row">
                         <div id = "subscriptions" class = "d-flex flex-row">
-                            <span class = "no_hightlight" style = "font-size: 2.8vmin; opacity: 0.6;">Підписки: </span>';
-                                 $loginUser = $rowLoginUser['login'];        
-
-                                 $queryNumFollow = mysqli_query($link,"SELECT  * FROM followers where login_follower = '$loginUser'");
+                            <span class = "no_hightlight" style = "font-size: 2.8vmin; opacity: 0.6;">Підписки: </span>';       
+                                 $queryNumFollow = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$idUser'");
                                  $numFollow = mysqli_num_rows($queryNumFollow);
 
                                  echo '<div onclick = "show(\'block\',\'8\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;">' .$numFollow.'</div>';			
                   echo '</div>
                         <div id = "followers" class = "d-flex flex-row">
                             <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin; opacity: 0.6;">Підписники: </span>';
-                                 $queryNumFollowers = mysqli_query($link,"SELECT  * FROM followers where id_user_follow = '$idUser'");
+                                 $queryNumFollowers = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$idUser'");
                                  $numFollowers = mysqli_num_rows($queryNumFollowers);
 
                            echo '<div onclick = "show(\'block\',\'7\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;" id = "numFollowers">' .$numFollowers.'</div>';	
@@ -94,7 +92,7 @@
 
                       if ($rowFollowers['id_follower'] == $_SESSION['id'])
                       {
-                        echo '<div><a href = "index.php?action=profile" >'.$rowFollowers['login_follower'].'</a></div>';
+                        echo '<div><a href = "index.php?action=profile" >'.$rowFollowers['login'].'</a></div>';
                       }
                       else
                       {
@@ -112,7 +110,7 @@
 
                       if ($rowFollow['id_user_follow'] == $_SESSION['id'])
                       {
-                        echo '<div><a href = "index.php?action=profile" >'.$rowFollow['login_user_follow'].'</a></div>';
+                        echo '<div><a href = "index.php?action=profile" >'.$rowFollow['login'].'</a></div>';
                       }
                       else
                       {
@@ -122,16 +120,26 @@
           echo '</div>
             </div>
 
-            <div class = "d-flex flex-row justify-content-around flex-wrap">';   
-                $getFotoPost = mysqli_query($link,"SELECT * FROM imggallery where iduser = '$idUser'");//для виводу фото юзера
-	            
-                while ( $rowFotoInf = mysqli_fetch_assoc($getFotoPost) )
-                {
-                  $idFoto = $rowFotoInf['image_id'];
+            <div class = "d-flex flex-row justify-content-around flex-wrap">';  
+                //для виводу фото юзера 
+                $getFotoPost = mysqli_query($link,"SELECT image_name, image_id FROM imggallery where iduser = '$idUser'");
+	              $numFoto = mysqli_num_rows($getFotoPost);
 
-           echo  '<a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
-                    <img src = "./fotopost/'.$rowFotoInf['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
-                  </a>';
+                if ($numFoto == 0)
+                {
+                  echo '<div style = "height: 40%"><span style = "font-size: 4em;">Немає фото</span></div>';
+                }
+                else
+                {
+
+                  while ( $rowFotoInf = mysqli_fetch_assoc($getFotoPost) )
+                  {
+                    $idFoto = $rowFotoInf['image_id'];
+  
+             echo  '<a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
+                      <img src = "./fotopost/'.$rowFotoInf['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
+                    </a>';
+                  }
                 }
       echo '</div>';
     }
