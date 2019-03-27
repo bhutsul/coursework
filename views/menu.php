@@ -4,7 +4,7 @@
         </a>
     </div>
     <div class = "d-flex flex-row">
-        <div style = "opacity: 0.6;">
+        <div>
             <a href = "index.php?action=login">
               <span class = "no_hightlight" style = "font-size: 3vmin;">Вхід</span>
             </a>

@@ -29,7 +29,7 @@
 
         move_uploaded_file($_FILES['uploadfile']['tmp_name'], $uploadfile);
 
-        $sql= "INSERT INTO imggallery(`iduser`, `login_user`, `image`, `image_name`, `date_post`) VALUES ('$id', '$login', '$image', '$image_name', '$date')";
+        $sql= "INSERT INTO imggallery(`iduser`, `image`, `image_name`, `date_post`) VALUES ('$id', '$image', '$image_name', '$date')";
         $result = mysqli_query($link, $sql);
       } 
       else
@@ -109,22 +109,22 @@
               ?>
         </span>
         <div class = "d-flex flex-row">
-            <div class = "d-flex flex-row followers">
+            <div class = "d-flex flex-row"  onclick = "show('block','6')" >
                 <span class = "no_hightlight" style = "font-size: 2.8vmin;">Підписки: </span>
                      <?php
                          $getFollow = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$id'");
                          $numFollow = mysqli_num_rows($getFollow);
 
-                         echo '<div onclick = "show(\'block\',\'6\')" style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollow.'</div>';
+                         echo '<div style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollow.'</div>';
                      ?>
             </div>
-            <div class = "d-flex flex-row followers">
+            <div class = "d-flex flex-row" onclick = "show('block','5')" >
                 <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin;">Підписники: </span>
                      <?php
                          $getFollowers = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$id'");
                          $numFollowers = mysqli_num_rows($getFollowers);
 
-                         echo '<div onclick = "show(\'block\',\'5\')" style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollowers.'</div>';
+                         echo '<div style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollowers.'</div>';
                      ?>
             </div>
         </div>
@@ -136,10 +136,10 @@
                 </a>
             </div>
             <div onclick = "show('block','3')" class = "followers  mr-auto" style = "font-size: 2.8vmin;">
-                <span class = "no_hightlight" style = "font-size: 2.8vmin;">Добавити пост</span>
+                <span class = "no_hightlight counterClick" style = "font-size: 2.8vmin;">Добавити пост</span>
             </div>
             <div  onclick = "show('block','4')" class = "followers  mr-auto">
-                <span class = "no_hightlight" style = "font-size: 2.8vmin;" >Змінити аватар</span>
+                <span class = "no_hightlight counterClick" style = "font-size: 2.8vmin;" >Змінити аватар</span>
             </div>
         </div>
      </div>

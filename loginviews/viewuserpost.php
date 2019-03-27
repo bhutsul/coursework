@@ -71,9 +71,9 @@
           echo "<span style = 'color: black ; font-size: 0.9vw; margin-left: 25px;'>$msg</span>";
         }
       }
-  echo '<div class = "d-flex flex-wrap justify-content-around">
+  echo '<div class = "d-flex flex-wrap justify-content-center">
             <div class = "d-flex flex-column " style = "max-width: 50%">';
-         echo  '<img src = "./fotopost/'.$rowImageNamePost['image_name'].'"  style = "margin-top: 20px; object-fit: contain; height: 450px; max-width: 100%">    
+         echo  '<img src = "./fotopost/'.$rowImageNamePost['image_name'].'"  style = "margin-top: 20px; object-fit: contain; max-width: 100%" class = "col-sm-6 h-100">    
                 <div class = "d-flex flex-row">
                     <div onclick = "show(\'none\')" id = "wrap"></div>
                     <div id = "window7" class = "users_like">
@@ -113,7 +113,7 @@
                         echo '<span style = "margin-top:10px;">Вподобали:</span><div onclick = "show(\'block\',\'7\')"  style = "width: 10px; height: 10px; margin-top: 10px; "><span id = "counter" class = "no_hightlight">'.$numRows.'</span></div>';
           echo' </div>
             </div>
-            <div id = "post_inf" class = "d-flex flex-column justify-content-between ">
+            <div id = "post_inf" class = "d-flex border flex-column justify-content-between col-sm-5">
                 <div id = "comments" class = "d-flex flex-column align-items-center">';
                       $getComment = mysqli_query($link,"SELECT * FROM comments where id_post = '$idPost'");
 
@@ -143,10 +143,10 @@
                         }
                       }
           echo '</div>
-                <form action = "" class = "d-flex flex-column align-items-center" method = "POST" name = "addComment">
-                    <span class = "no_hightlight">Коментарій</span>
-                    <textarea  name = "comment" cols = "40" rows = "4" class = "form-control"></textarea>
-                    <input id = "button_register"  name = "addComment" type = "submit" value = "Добавити">   
+                <form action = "" class = "d-flex flex-column" method = "POST" name = "addComment">
+                    <label for = "comment" class = "no_hightlight" >Коментарій</span>
+                    <textarea  name = "comment" id = "comment" cols = "40" rows = "2" class = "form-control"></textarea>
+                    <button class = "btn border"  name = "addComment" type = "submit">Добавити</button>   
                 </form>
             </div>
         </div>';

@@ -8,7 +8,7 @@
           <span class = "no_hightlight" style = "font-size: 4vmin;">Instalite</span>
         </a>
     </div>
-    <div style = "opacity: 0.6;">
+    <div>
         <a href = "index.php?action=profile">
           <span class = "no_hightlight" style = "font-size: 3vmin;">
                <?php  

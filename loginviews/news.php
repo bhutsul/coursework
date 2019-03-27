@@ -26,9 +26,9 @@
          echo '
               <div class = "d-flex flex-column">
                   <a href = "index.php?action=viewuserprofile&idUser='.$idUser.'" >
-                    <span style = "font-size: 4vmin; opacity: 0.6;">'.$infFollow['login'].'</span>
+                    <span style = "font-size: 4vmin;">'.$infFollow['login'].'</span>
                   </a>
-                  <span style = "font-size: 2vmin; opacity: 0.6;">'.$infFollow['date_post'].'</span>
+                  <span style = "font-size: 2vmin;">'.$infFollow['date_post'].'</span>
               </div>
               <a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
               <img src = "./fotopost/'.$infFollow['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">

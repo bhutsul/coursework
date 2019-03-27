@@ -59,27 +59,27 @@
 
                     if ( empty($rowfollowUser) )
                     {
-                      echo '<button class = "gradient follow" id = "follow">Підписатись</button>';
+                      echo '<button class = "btn btn-light follow" id = "follow">Підписатись</button>';
                     }
                     else 
                     {
-                      echo '<button class = "gradient follow active" id = "unfollow">Відписатись</button>';
+                      echo '<button class = "btn btn-light follow active" id = "unfollow">Відписатись</button>';
                     }  
 
               echo '<div class = "d-flex flex-row">
-                        <div id = "subscriptions" class = "d-flex flex-row">
-                            <span class = "no_hightlight" style = "font-size: 2.8vmin; opacity: 0.6;">Підписки: </span>';       
+                        <div id = "subscriptions" onclick = "show(\'block\',\'8\')" class = "d-flex flex-row">
+                            <span class = "no_hightlight" style = "font-size: 2.8vmin;">Підписки: </span>';       
                                  $queryNumFollow = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$idUser'");
                                  $numFollow = mysqli_num_rows($queryNumFollow);
 
-                                 echo '<div onclick = "show(\'block\',\'8\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;">' .$numFollow.'</div>';			
+                                 echo '<div style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;">' .$numFollow.'</div>';			
                   echo '</div>
-                        <div id = "followers" class = "d-flex flex-row">
-                            <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin; opacity: 0.6;">Підписники: </span>';
+                        <div id = "followers" onclick = "show(\'block\',\'7\')" class = "d-flex flex-row">
+                            <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin;">Підписники: </span>';
                                  $queryNumFollowers = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$idUser'");
                                  $numFollowers = mysqli_num_rows($queryNumFollowers);
 
-                           echo '<div onclick = "show(\'block\',\'7\')" style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;" id = "numFollowers">' .$numFollowers.'</div>';	
+                           echo '<div style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;" id = "numFollowers">' .$numFollowers.'</div>';	
                   echo '</div>
                     </div>
                 </div>

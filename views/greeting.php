@@ -1,6 +1,5 @@
-<div  class = "d-flex flex-wrap-reverse flex-row-reverse justify-content-around">
-    <img src = "./img/greeting.jpg" style = "height: auto; min-width: 40%; margin-top: 20px; border-radius: 0px 0px 20px 0px;" class = "greetingFoto">
-    <div id = "register_user" class = "d-flex flex-column justify-content-around p-5 gradient register" class = "register">  
+<div class = "d-flex flex-row-reverse justify-content-between flex-wrap">
+    <div class = "border rounded form-group col-sm-6 h-75" style = "margin-top: 20px;">
         <?php
             if ( isset( $_POST['register'] ) )
             {
@@ -85,18 +84,20 @@
               }
 	        }	
 	    ?>
-	  <form class = "d-flex flex-column align-items-center" method = "POST" name = "registerform">
-           <span class = "no_hightlight">Електронна адреса</span>
-           <input class = "size_text" name = "email" size = "32"  type = "email" value = " <?= !empty($_POST)?$email:"" ?>">
-           <span class = "no_hightlight">Логін</span>
-           <input class = "size_text" name = "username" size = "32" type = "text" value = "<?= !empty($_POST)?$login:"" ?>">
-           <span class = "no_hightlight">Про себе</span>
-           <input class = "size_text_inf" name = "information" size = "32" type = "text" size = "20" maxlength = "50" value = "<?= !empty($_POST)?$information:"" ?>">
-           <span class = "no_hightlight">Пароль</span>
-           <input class = "size_text" name = "password" size = "32" type = "password" value = "">
-           <span class = "no_hightlight">Підтвердіть пароль</span>
-           <input class = "size_text" name = "repeat_password" size = "32" type = "password" value = "">
-           <input id = "button_register" id = "register" name = "register" type = "submit" value = "Зареєструватись">
+	  <form  method = "POST" name = "registerform">
+           <label class = "no_hightlight" for = "emailText">Електронна адреса</label>
+           <input class = "form-control" id = "emailText" name = "email" size = "32"  type = "email" value = " <?= !empty($_POST)?$email:"" ?>">
+           <label class = "no_hightlight" for = "loginText">Логін</label>
+           <input class = "form-control" id = "loginText" name = "username" size = "32" type = "text" value = "<?= !empty($_POST)?$login:"" ?>">
+           <label class = "no_hightlight" for = "userInf">Про себе</label>
+           <textarea name = "information" id = "userInf" class = "md-textarea form-control" rows = "5" value = "<?= !empty($_POST)?$information:"" ?>"></textarea>
+           <label class = "no_hightlight" for = "passwordText">Пароль</label>
+           <input class = "form-control" id = "passwordText" name = "password" size = "32" type = "password" value = "">
+           <label class = "no_hightlight" for = "repeatPasswordText">Підтвердіть пароль</label>
+           <input class = "form-control" id = "repeatPasswordText" name = "repeat_password" size = "32" type = "password" value = "">
+           <button class = "btn btn-default" name = "register" type = "submit">Зареєструватись</button>
       </form>
     </div>
-</div>			
+    <img src = "./img/greeting.png"  class = "greetingFoto col-sm-6 h-75" style = "object-fit: contain; margin-top: 20px;">
+</div>
+	

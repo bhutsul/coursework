@@ -1,5 +1,5 @@
-<div class = "d-flex flex-column align-items-center ">
-    <div id = "redact_user" class = "d-flex flex-column justify-content-around align-items-center gradient p-3">
+<div class = "d-flex flex-row-reverse justify-content-between flex-wrap">
+    <div class = "border rounded form-group col-sm-6 h-100" style = "margin-top: 20px;">
         <?php 
             $id = $_SESSION['id'];
 
@@ -110,22 +110,25 @@
             }	
 	  ?>
 	  
-      <form  class = "d-flex flex-column align-items-center " method = "POST" name = "edit">
-      	  <span class = "no_hightlight">Електронна адреса</span>
-          <input class = "size_text" id = "email" name = "email" size = "32" type = "email" value = " <?= !empty($_POST)?$email:"" ?>">
-          <span class = "no_hightlight">Логін</span>
-          <input class = "size_text" id = "username" name = "username" size = "32" type = "text" value = "<?= !empty($_POST)?$login:"" ?>">
-          <span class = "no_hightlight">Про себе</span>
-          <input class = "size_text_inf" id = "information" name = "information" size = "32" type = "text" size = "20" maxlength = "50" value = "<?= !empty($_POST)?$information:"" ?>">
-          <span class = "no_hightlight">Старий пароль</span>
-          <input class = "size_text"  name = "password" size = "32" type = "password" value = "">
-          <span class = "no_hightlight">Новий пароль</span>
-          <input class = "size_text"  name = "new_password" size = "32" type = "password" value = "">
-          <span class = "no_hightlight">Підтвердіть пароль</span>
-          <input class = "size_text"  name = "repeat_new_password" size = "32" type = "password" value = "">
-          <input id = "button_register"  name = "edit" type = "submit" value = "Редагувати">
+      <form  method = "POST" name = "edit">
+      	  <label class = "no_hightlight" for = "emailText">Електронна адреса</label>
+          <input class = "form-control" id = "emailText" name = "email" size = "32" type = "email" value = " <?= !empty($_POST)?$email:"" ?>">
+          <label class = "no_hightlight" for = "loginText">Логін</label>
+          <input class = "form-control" id = "loginText" name = "username" size = "32" type = "text" value = "<?= !empty($_POST)?$login:"" ?>">
+          <label class = "no_hightlight" for = "userInf">Про себе</label>
+          <textarea name = "information" id = "userInf" class = "md-textarea form-control" rows = "5" value = "<?= !empty($_POST)?$information:"" ?>"></textarea>
+          <label class = "no_hightlight" for = "oldPassword">Старий пароль</label>
+          <input class = "form-control" id = "oldPassword" name = "password" size = "32" type = "password" value = "">
+          <label class = "no_hightlight" for = "newPassword">Новий пароль</label>
+          <input class = "form-control"  id = "newPassword" name = "new_password" size = "32" type = "password" value = "">
+          <label class = "no_hightlight" for = "repeatNewPassword">Підтвердіть пароль</label>
+          <input class = "form-control"  id = "repeatNewPassword" name = "repeat_new_password" size = "32" type = "password" value = "">
+          <button class = "btn border" style = "margin-top: 1%;" name = "edit" type = "submit">Редагувати</button>
       </form>
-      <span>Видалити аватар </span>
-      <img src = "./img/trash.png" width = "40px" height = "40px" style = "cursor: pointer;" class = "deleteAvatar">
-    </div>	
+      <div class = "d-flex flex-column align-items-center justify-content-center">
+          <span>Видалити аватар </span>
+          <img src = "./img/trash.png" width = "40px" height = "40px" style = "cursor: pointer;" class = "deleteAvatar ">
+      </div>
+    </div>
+    <img src = "./img/edit.png"  class = "greetingFoto col-sm-6 h-100" style = "object-fit: contain;">	
 </div>

@@ -1,50 +1,52 @@
-<div class = "d-flex flex-column align-items-center">
-    <form name = "loginform" id = "login" action = "" method = "POST" class = "d-flex flex-column align-items-center gradient p-5">
-         <?php
-             if ( !empty($_POST) )
-             {
-               $login = trim($_POST['username']);
-               $password = $_POST['password'];
-
-               if (($login == "") || ($password == "")) 
-               {
-                 echo "<span>Заповніть всі поля</span>";
-               } 
-               else 
-               {
-
-                 if ($link)
+<div class = "d-flex flex-row-reverse justify-content-around align-items-center flex-wrap">
+    <div class = "border rounded form-group col-sm-4 d-flex flex-column justify-content-center h-50" style = "margin-top: 20px;">
+        <form name = "loginform" action = "" method = "POST">
+             <?php
+                 if ( !empty($_POST) )
                  {
-                   $query = mysqli_query($link,"SELECT * FROM users where login = '$login'");
-                   $row = mysqli_fetch_assoc($query);
+                   $login = trim($_POST['username']);
+                   $password = $_POST['password'];
 
-                   if ($row == false)
+                   if (($login == "") || ($password == "")) 
                    {
-                     echo "<span>Невірний логін або пароль!</span>";
+                     echo "<span>Заповніть всі поля</span>";
                    } 
                    else 
                    {
 
-                     if ( password_verify($password,$row['password']) ) 
+                     if ($link)
                      {
-                       $_SESSION['login'] = $row['login']; 
-                       $_SESSION['id']    = $row['id'];
-                       header("Location: index.php?action=profile");
-                     } 
-                     else 
-                     {
-                       echo "<span>Невірний логін або пароль!</span>";
-                     }
+                       $query = mysqli_query($link,"SELECT * FROM users where login = '$login'");
+                       $row = mysqli_fetch_assoc($query);
+
+                       if ($row == false)
+                       {
+                         echo "<span>Невірний логін або пароль!</span>";
+                       } 
+                       else 
+                       {
+
+                         if ( password_verify($password,$row['password']) ) 
+                         {
+                           $_SESSION['login'] = $row['login']; 
+                           $_SESSION['id']    = $row['id'];
+                           header("Location: index.php?action=profile");
+                         } 
+                         else 
+                         {
+                           echo "<span>Невірний логін або пароль!</span>";
+                         }
+                       }
+                     }   
                    }
-                 }   
-               }
-             }
-         ?>
-        <span class = "no_hightlight">Логін</span>
-        <input type = "text" size = "40" name = "username" id = "username" class = "size_text">
-        <span class = "no_hightlight">Пароль</span>
-        <input type = "password" name = "password" id = "password" size = "40" class = "size_text">
-        <input type = "submit" name = "login" value = "Вхід" id = "button_register">
-        <span>Немає аккаунта?<a href = "index.php?action=greeting">Зареєструйся тут</a>!</span>
-    </form>			
+                 }
+             ?>
+            <label for = "loginText" class = "no_hightlight">Логін</label>
+            <input type = "text" class = "form-control" size = "40" name = "username" id = "loginText" class = "size_text">
+            <label for = "passwordText" class = "no_hightlight">Пароль</label>
+            <input type = "password" class = "form-control" name = "password" id = "passwordText" size = "40" class = "size_text">
+            <button class = "btn btn-default" type = "submit" name = "login">Вхід</button>
+        </form>			
+    </div>
+    <img src = "./img/login.png"  class = "greetingFoto col-sm-6 h-75" style = "object-fit: contain;">
 </div>

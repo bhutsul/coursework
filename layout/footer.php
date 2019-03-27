@@ -1,4 +1,4 @@
-            <div id = "footer" class = "d-flex justify-content-between " style = "padding-top: 10px; border-top: 1px solid silver;">
+            <div id = "footer" class = "d-flex justify-content-between ">
                 <span style = "font-size: 3vmin;"> © B.Hutsul</span>
                 <?php 
                     if ( isset($_SESSION['login'])and isset($_SESSION['id']))
