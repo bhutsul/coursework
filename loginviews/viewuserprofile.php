@@ -120,9 +120,9 @@
           echo '</div>
             </div>
 
-            <div class = "d-flex flex-row justify-content-around flex-wrap">';  
+            <div class = "d-flex flex-row justify-content-around flex-wrap" id = "fotoUser">';  
                 //для виводу фото юзера 
-                $getFotoPost = mysqli_query($link,"SELECT image_name, image_id FROM imggallery where iduser = '$idUser'");
+                $getFotoPost = mysqli_query($link,"SELECT image_name, image_id FROM imggallery where iduser = '$idUser' LIMIT 6");
 	              $numFoto = mysqli_num_rows($getFotoPost);
 
                 if ($numFoto == 0)
@@ -131,16 +131,20 @@
                 }
                 else
                 {
-
+                  $fotos = [];
+                  
                   while ( $rowFotoInf = mysqli_fetch_assoc($getFotoPost) )
                   {
-                    $idFoto = $rowFotoInf['image_id'];
-  
-             echo  '<a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
-                      <img src = "./fotopost/'.$rowFotoInf['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
-                    </a>';
+                    $fotos[] = $rowFotoInf;
                   }
+
+                  foreach ($fotos as $foto):  
+             echo  '<a href = "index.php?action=viewuserpost&idPost='.$foto['image_id'].'" >
+                      <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
+                    </a>';
+                  endforeach;
                 }
+                $_SESSION['idUser'] = $idUser;
       echo '</div>';
     }
 ?>

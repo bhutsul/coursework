@@ -187,10 +187,9 @@
             }
         ?>
     </div>
-</div>
-
-<div class = "d-flex flex-row flex-wrap justify-content-around">
-    <?php
+</div> 
+<div class = "d-flex flex-row flex-wrap justify-content-around" id = "foto">
+    <?php 
         $getFoto = mysqli_query($link, "SELECT image_name, image_id FROM imggallery where iduser = '$id' LIMIT 6");
         $numFoto = mysqli_num_rows($getFoto);
 
@@ -200,17 +199,22 @@
         }
         else
         {
+          
+          $fotos = [];
 
           while ( $rowFoto = mysqli_fetch_assoc($getFoto) )
           {
-            $idFoto = $rowFoto['image_id'];
-
-     echo  '<div style = "margin-top: 20px;">
-                <a href = "index.php?action=viewpost&idPost='.$idFoto.'" >
-                  <img src = "./fotopost/'.$rowFoto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
-                </a>
-            </div>';
+            $fotos[] = $rowFoto;
           }
         }
     ?>
+    <?php foreach ($fotos as $foto): ?>
+        <div style = "margin-top: 20px;">
+            <?php 
+                echo '<a href = "index.php?action=viewpost&idPost='.$foto['image_id'].'" >
+                         <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
+                      </a>'; 
+            ?>
+        </div>
+    <?php endforeach; ?>
 </div>

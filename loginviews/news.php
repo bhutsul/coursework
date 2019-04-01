@@ -1,4 +1,4 @@
-<div class = "d-flex flex-column flex-wrap align-items-center">
+<div class = "d-flex flex-column flex-wrap align-items-center" id = "news">
     <?php
         $id = $_SESSION['id']; 
 
@@ -11,31 +11,38 @@
         }
         else
         {
-
+          $news = [];
           while ( $rowUserFollow = mysqli_fetch_assoc($getUserFollow) )
           {
             $idUserNews = $rowUserFollow['id_user_follow'];
 
-            $getInfFollow = mysqli_query($link, "SELECT * FROM `imggallery` INNER JOIN users ON imggallery.iduser = users.id where iduser = '$idUserNews'  ORDER BY UNIX_TIMESTAMP(date_post) DESC");
+            $getInfFollow = mysqli_query($link, "SELECT date_post, image_name, iduser, image_id, login FROM `imggallery` INNER JOIN users ON imggallery.iduser = users.id where iduser = '$idUserNews' ");
 
             while ( $infFollow = mysqli_fetch_assoc($getInfFollow) )
             {
-              $idFoto = $infFollow['image_id'];
-              $idUser = $infFollow['iduser'];
-
-         echo '
-              <div class = "d-flex flex-column">
-                  <a href = "index.php?action=viewuserprofile&idUser='.$idUser.'" >
-                    <span style = "font-size: 4vmin;">'.$infFollow['login'].'</span>
-                  </a>
-                  <span style = "font-size: 2vmin;">'.$infFollow['date_post'].'</span>
-              </div>
-              <a href = "index.php?action=viewuserpost&idPost='.$idFoto.'" >
-              <img src = "./fotopost/'.$infFollow['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">
-              </a>
-              ';
+              $news[] = $infFollow;
             }
           }
+          
+          $newsStart = [];
+          for ($i = 0; $i < 3; $i++)
+          {
+            $newsStart[] = $news[$i];
+          }
+
+          foreach ($newsStart as $newsInf):
+       echo '
+            <div class = "d-flex flex-column">
+                <a href = "index.php?action=viewuserprofile&idUser='.$newsInf['iduser'].'" >
+                  <span style = "font-size: 4vmin;">'.$newsInf['login'].'</span>
+                </a>
+                <span style = "font-size: 2vmin;">'.$newsInf['date_post'].'</span>
+            </div>
+            <a href = "index.php?action=viewuserpost&idPost='.$newsInf['image_id'].'" >
+            <img src = "./fotopost/'.$newsInf['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">
+            </a>
+            ';
+          endforeach; 
         }
     ?>
 </div>

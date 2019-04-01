@@ -94,7 +94,7 @@
 
   echo '<div class = "d-flex flex-wrap justify-content-center ">
             <div class = "d-flex flex-column" style = "max-width: 50%">
-                <img src = "./fotopost/'.$rowFotoName['image_name'].'"  style = "margin-top: 20px; margin-right:0; object-fit: contain; max-width: 100%" class = "col-sm-6 h-100">
+                <img src = "./fotopost/'.$rowFotoName['image_name'].'"  style = "margin-top: 20px; margin-right:0; object-fit: cover; max-width: 100%" class = "col-sm-6 h-100">
                 <div  class = "d-flex flex-row justify-content-between">
                     <div onclick = "show(\'none\')" id = "wrap"></div>
                         <div id = "window6" class = "users_like">
