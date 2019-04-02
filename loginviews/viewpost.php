@@ -134,7 +134,10 @@
                             {
                               echo '<button class = "like active" id = "dislike"></button>';
                             }
-                            echo '<span style = "margin-top:10px;">Вподобали: </span><div onclick = "show(\'block\',\'6\')" style = "margin-top:10px;" "><span id = "counter" class = "no_hightlight">'.$numRows.'</span></div>';
+                            echo '<div onclick = "show(\'block\',\'6\')" style = "margin-top:10px;" ">
+                                      <span style = "margin-top:10px;">Вподобали: </span>
+                                      <span id = "counter" class = "no_hightlight">'.$numRows.'</span>
+                                  </div>';
               echo '</div>
                     <div class = "deletePost">
                         <img src = "./img/trash.png" width = "40px" height = "40px" >

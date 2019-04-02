@@ -23,8 +23,17 @@
               $news[] = $infFollow;
             }
           }
-          
+
+          $sortNews = [];
+
+          foreach ($news as $key => $arr) 
+          {
+            $sortNews[$key] = $arr['date_post'];
+          }
+          array_multisort($sortNews, SORT_STRING, SORT_DESC, $news);
+
           $newsStart = [];
+
           for ($i = 0; $i < 3; $i++)
           {
             $newsStart[] = $news[$i];

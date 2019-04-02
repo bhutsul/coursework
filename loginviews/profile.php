@@ -149,9 +149,13 @@
 <div id = "window3" class = "boxstyleProfile">
     <img class = "close" onclick = "show('none')" src="./img/close.png" width = "20px" height = "20px">
       <form enctype = "multipart/form-data" action = "" method = "POST" name = "submit">
-           <input type = "hidden"  id = "button_register"/>
-           <span>Добавити фото: </span><input name = "uploadfile" type = "file" required />
-           <input type = "submit" name = "addFoto" value = "Добавити фото" id = "button_register"/>
+          <div class = "input-group">
+              <div class = "custom-file">
+                  <input type = "file" name = "uploadfile" class = "custom-file-input" id = "inputGroupFile01" aria-describedby = "inputGroupFileAddon01">
+                  <label class = "custom-file-label" for = "inputGroupFile01">Choose file</label>
+              </div>
+          </div>
+          <input type = "submit" name = "addFoto" value = "Добавити фото" class = "btn btn-light ml-auto" style = "width: 100%; margin-top: 2%;"/>
       </form>
 </div>
 
@@ -159,9 +163,13 @@
 <div id = "window4" class = "boxstyleProfile">
     <img class = "close" onclick = "show('none')" src="./img/close.png" width = "20px" height = "20px">
       <form enctype = "multipart/form-data" action = "" method = "POST" name = "add_avatar">
-           <input type = "hidden" />
-           <span>Змінити аватар: </span><input name = "uploadfile" type = "file" required />
-           <input type = "submit" name = "addAvatar" value = "Змінити" id = "button_register"/>
+          <div class = "input-group">
+              <div class = "custom-file">
+                  <input type = "file" name = "uploadfile" class = "custom-file-input" id = "inputGroupFile01" aria-describedby = "inputGroupFileAddon01">
+                  <label class = "custom-file-label" for = "inputGroupFile01">Choose file</label>
+              </div>
+          </div>
+          <input type = "submit" name = "addAvatar" value = "Змінити" class = "btn btn-light ml-auto" style = "width: 100%; margin-top: 2%;"/>
       </form>
 </div>
 
@@ -206,15 +214,13 @@
           {
             $fotos[] = $rowFoto;
           }
+          foreach ($fotos as $foto): 
+            echo '<div style = "margin-top: 20px;">
+                      <a href = "index.php?action=viewpost&idPost='.$foto['image_id'].'" >
+                        <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
+                      </a> 
+                  </div>';
+          endforeach; 
         }
     ?>
-    <?php foreach ($fotos as $foto): ?>
-        <div style = "margin-top: 20px;">
-            <?php 
-                echo '<a href = "index.php?action=viewpost&idPost='.$foto['image_id'].'" >
-                         <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
-                      </a>'; 
-            ?>
-        </div>
-    <?php endforeach; ?>
 </div>

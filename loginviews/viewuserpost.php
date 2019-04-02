@@ -110,7 +110,10 @@
                         {
                           echo '<button class = "like active" id = "dislike"></button>';
                         }     
-                        echo '<span style = "margin-top:10px;">Вподобали:</span><div onclick = "show(\'block\',\'7\')"  style = "width: 10px; height: 10px; margin-top: 10px; "><span id = "counter" class = "no_hightlight">'.$numRows.'</span></div>';
+                        echo '<div onclick = "show(\'block\',\'7\')"  style = "margin-top: 10px; ">
+                                  <span style = "margin-top:10px;">Вподобали:</span>
+                                  <span id = "counter" class = "no_hightlight">'.$numRows.'</span>
+                              </div>';
           echo' </div>
             </div>
             <div id = "post_inf" class = "d-flex border flex-column justify-content-between col-sm-5">
