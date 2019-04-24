@@ -84,6 +84,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $(".deletePost").bind("click", function() {
+
     if (confirm("Ви дійсно бажаєте видалити фото?")) 
     {
       var deletePostYes = 1;
@@ -111,6 +112,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $(".deleteAvatar").bind("click", function() {
+
     if (confirm("Ви дійсно бажаєте видалити фото?")) 
     {
       var deleteAvatarYes = 1;
@@ -175,6 +177,7 @@ $(document).ready(function() {
     var inProgress = false;
     var startFrom = 6;
     $(window).scroll(function() {
+
       if($(window).scrollTop() + $(window).height() >= $(document).height() - 50 && !inProgress) 
       {
        $.ajax({
@@ -191,13 +194,14 @@ $(document).ready(function() {
               id2 = data.indexOf('</JSON>');
               datas = data.substring(id1,id2);
               var res = jQuery.parseJSON(datas);
+
               if (res.length > 0) 
               {  
                 $.each(res, function(index, data)
                 {
                     $("#foto").append(
-                      "<a href = \"index.php?action=viewpost&idPost="+ res[index].image_id + "\"><img src = \"./fotopost/" + res[index].image_name + 
-                           "\" width = \"300px\" height = \"300px\" style = \" object-fit: cover; margin-top: 20px;\"></a>");
+                      "<div style = \" margin: 2%;\"><a href = \"index.php?action=viewpost&idPost="+ res[index].image_id + "\"><img src = \"./fotopost/" + res[index].image_name + 
+                           "\" width = \"300px\" height = \"300px\" style = \" object-fit: cover; \"></a></div>");
                 });
 
                 inProgress = false;
@@ -212,6 +216,7 @@ $(document).ready(function() {
     var inProgress = false;
     var fotoStartFrom = 6;
     $(window).scroll(function() {
+
       if($(window).scrollTop() + $(window).height() >= $(document).height() - 50 && !inProgress) 
       {
        $.ajax({
@@ -228,13 +233,14 @@ $(document).ready(function() {
               id4 = data.indexOf('</JSON>');
               datas = data.substring(id3,id4);
               var resViewUser = jQuery.parseJSON(datas);
+
               if (resViewUser.length > 0) 
               {  
                 $.each(resViewUser, function(index, data)
                 {
                     $("#fotoUser").append(
-                      "<a href = \"index.php?action=viewuserpost&idPost="+ resViewUser[index].image_id + "\"><img src = \"./fotopost/" + resViewUser[index].image_name + 
-                           "\" width = \"300px\" height = \"300px\" style = \" object-fit: cover; margin-top: 20px;\"></a>");
+                      "<div style = \"margin: 2%;\"><a href = \"index.php?action=viewuserpost&idPost="+ resViewUser[index].image_id + "\"><img src = \"./fotopost/" + resViewUser[index].image_name + 
+                           "\" width = \"300px\" height = \"300px\" style = \" object-fit: cover; margin-top: 20px;\"></a></div>");
                 });
 
                 inProgress = false;
@@ -248,8 +254,9 @@ $(document).ready(function() {
 $(document).ready(function() {
     var inProgress = false;
     var newsStartFrom = 3;
-    var newsEndFrom = 4;
+    var newsEndFrom = 6;
     $(window).scroll(function() {
+
       if($(window).scrollTop() + $(window).height() >= $(document).height() - 50 && !inProgress) 
       {
        $.ajax({
@@ -274,19 +281,22 @@ $(document).ready(function() {
               {  
                 $.each(resViewNews, function(index, data)
                 {
+                    if (resViewNews[index] == null){
+                      return false;
+                    }
                     $("#news").append(
                       "<div class = \"d-flex flex-column\"><a href = \"index.php?action=viewuserprofile&idUser=" + resViewNews[index].iduser + 
                       "\"><span style = \"font-size: 4vmin;\">" + resViewNews[index].login + 
                       "</span></a><span style = \"font-size: 2vmin;\">" + resViewNews[index].date_post + 
                       "</span></div><a href = \"index.php?action=viewuserpost&idPost=" + resViewNews[index].image_id + 
                       "\"><img src = \"./fotopost/" + resViewNews[index].image_name + 
-                      "\"style = \"margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;\"></a>"
+                      "\"style = \"margin-top: 20px; width:100%; max-width: 500px; min-width: 500px; height: 500px; object-fit: cover;\"></a>"
                       );
                 });
 
                 inProgress = false;
-                newsStartFrom += 1;
-                newsEndFrom += 1;
+                newsStartFrom += 3;
+                newsEndFrom += 3;
               }
             });
         }

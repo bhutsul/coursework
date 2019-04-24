@@ -42,7 +42,7 @@
         $errorsComment = [];
 
         $regComment = '/(([a-zA-Z0-9]{4,255})|([а-яё0-9]{4,255})|([абвгґдеєжзиіїйклмнопрстуфхцчшщьюяы0-9]{4,255}))/';
-        $comment    = $_POST['comment'];
+        $comment    = trim($_POST['comment']);
 
         if ( !preg_match($regComment, $comment) )
         {
@@ -51,6 +51,7 @@
 
         if ( empty($errorsComment) )
         {
+          
           if (isset ($_SESSION['login']) )
           {
             $loginUser = $_SESSION['login'];
@@ -110,7 +111,7 @@
                         {
                           echo '<button class = "like active" id = "dislike"></button>';
                         }     
-                        echo '<div onclick = "show(\'block\',\'7\')"  style = "margin-top: 10px; ">
+                        echo '<div onclick = "show(\'block\',\'7\')"  style = "margin-top: 10px;" class = "clickProfileBtn">
                                   <span style = "margin-top:10px;">Вподобали:</span>
                                   <span id = "counter" class = "no_hightlight">'.$numRows.'</span>
                               </div>';

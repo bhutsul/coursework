@@ -41,14 +41,14 @@
 
           foreach ($newsStart as $newsInf):
        echo '
-            <div class = "d-flex flex-column">
+            <div class = "d-flex flex-column" style = "margin-top: 1%;">
                 <a href = "index.php?action=viewuserprofile&idUser='.$newsInf['iduser'].'" >
-                  <span style = "font-size: 4vmin;">'.$newsInf['login'].'</span>
+                  <span style = "font-size: 4vmin;" class = "clickProfileBtn">'.$newsInf['login'].'</span>
                 </a>
                 <span style = "font-size: 2vmin;">'.$newsInf['date_post'].'</span>
             </div>
             <a href = "index.php?action=viewuserpost&idPost='.$newsInf['image_id'].'" >
-            <img src = "./fotopost/'.$newsInf['image_name'].' "style = "margin-top: 20px; width:100%; max-width: 500px; height: 500px; object-fit: cover;">
+            <img src = "./fotopost/'.$newsInf['image_name'].' "style = "margin-top: 20px; width:100%; min-width: 500px; max-width: 500px; height: 500px; object-fit: cover;">
             </a>
             ';
           endforeach; 

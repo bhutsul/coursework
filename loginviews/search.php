@@ -1,6 +1,6 @@
 <div class = "d-flex flex-row flex-wrap justify-content-center">
     <div class = "d-flex flex-column col-sm-4">
-        <div class = "border rounded d-flex flex-column align-items-center h-50" style = "margin-top: 20px;">
+        <div class = "border rounded d-flex flex-column align-items-center h-50" style = "margin-top: 10%;">
            <?php
                if (!empty($_POST)) 
                {

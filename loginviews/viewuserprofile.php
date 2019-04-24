@@ -67,14 +67,14 @@
                     }  
 
               echo '<div class = "d-flex flex-row">
-                        <div id = "subscriptions" onclick = "show(\'block\',\'8\')" class = "d-flex flex-row">
+                        <div onclick = "show(\'block\',\'8\')" class = "d-flex flex-row clickProfileBtn">
                             <span class = "no_hightlight" style = "font-size: 2.8vmin;">Підписки: </span>';       
                                  $queryNumFollow = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$idUser'");
                                  $numFollow = mysqli_num_rows($queryNumFollow);
 
                                  echo '<div style = "font-size: 2.8vmin; margin-left: 4px; opacity: 0.6;">' .$numFollow.'</div>';			
                   echo '</div>
-                        <div id = "followers" onclick = "show(\'block\',\'7\')" class = "d-flex flex-row">
+                        <div id onclick = "show(\'block\',\'7\')" class = "d-flex flex-row clickProfileBtn">
                             <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin;">Підписники: </span>';
                                  $queryNumFollowers = mysqli_query($link,"SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$idUser'");
                                  $numFollowers = mysqli_num_rows($queryNumFollowers);
@@ -84,6 +84,7 @@
                     </div>
                 </div>
             </div>
+            <div onclick = "show(\'none\')" id = "wrap"></div>
             <div id = "window7" class = "users_like" >
                 <img class = "close" onclick = "show(\'none\')" src="./img/close.png" width = "20px" height = "20px">
                 <div class = "d-flex flex-column view_users_like">';
@@ -96,7 +97,7 @@
                       }
                       else
                       {
-                        echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollowers['id_follower'].'" >'.$rowFollowers['login_follower'].'</a></div>';
+                        echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollowers['id_follower'].'" >'.$rowFollowers['login'].'</a></div>';
                       }
                     }
           echo '</div>
@@ -114,13 +115,13 @@
                       }
                       else
                       {
-                        echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollow['id_user_follow'].'" >'.$rowFollow['login_user_follow'].'</a></div>';
+                        echo '<div><a href = "index.php?action=viewuserprofile&idUser='.$rowFollow['id_user_follow'].'" >'.$rowFollow['login'].'</a></div>';
                       }
                     }
           echo '</div>
             </div>
 
-            <div class = "d-flex flex-row justify-content-around flex-wrap" id = "fotoUser">';  
+            <div class = "d-flex flex-row justify-content-start flex-wrap p-4" id = "fotoUser">';  
                 //для виводу фото юзера 
                 $getFotoPost = mysqli_query($link,"SELECT image_name, image_id FROM imggallery where iduser = '$idUser' LIMIT 6");
 	              $numFoto = mysqli_num_rows($getFotoPost);
@@ -139,9 +140,13 @@
                   }
 
                   foreach ($fotos as $foto):  
-             echo  '<a href = "index.php?action=viewuserpost&idPost='.$foto['image_id'].'" >
-                      <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = "margin-top: 30px; object-fit: cover;">
-                    </a>';
+             echo  '
+                    <div style = "margin: 2%;">
+                        <a href = "index.php?action=viewuserpost&idPost='.$foto['image_id'].'" >
+                          <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = "object-fit: cover;">
+                        </a>
+                    </div>
+                   ';
                   endforeach;
                 }
                 $_SESSION['idUser'] = $idUser;

@@ -40,7 +40,7 @@
               while ( $rowLoginAndEmail = mysqli_fetch_assoc($checkLoginAndEmail) )
               {
 
-                if ($rowLoginAndEmail['login'] == $login)
+                if ( ($rowLoginAndEmail['login'] == $login) && ($rowLoginAndEmail['login'] != $_SESSION['login']))
                 {
                   $errors[] = "Користувач з таким ім'ям вже існує";
                 }
@@ -130,5 +130,5 @@
           <img src = "./img/trash.png" width = "40px" height = "40px" style = "cursor: pointer;" class = "deleteAvatar ">
       </div>
     </div>
-    <img src = "./img/edit.png"  class = "greetingFoto col-sm-6 h-100" style = "object-fit: contain;">	
+    <img src = "./img/edit.png"  class = "greetingFoto col-sm-6 h-100" style = "object-fit: contain; margin-top: 2%;">	
 </div>

@@ -108,8 +108,8 @@
                  echo $_SESSION['login'];
               ?>
         </span>
-        <div class = "d-flex flex-row">
-            <div class = "d-flex flex-row"  onclick = "show('block','6')" >
+        <div class = "d-flex flex-row"> 
+            <div class = "d-flex flex-row clickProfileBtn"  onclick = "show('block','6')" >
                 <span class = "no_hightlight" style = "font-size: 2.8vmin;">Підписки: </span>
                      <?php
                          $getFollow = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_user_follow = users.id where id_follower = '$id'");
@@ -118,7 +118,7 @@
                          echo '<div style = "font-size: 2.8vmin; margin-left: 4px;">' .$numFollow.'</div>';
                      ?>
             </div>
-            <div class = "d-flex flex-row" onclick = "show('block','5')" >
+            <div class = "d-flex flex-row clickProfileBtn" onclick = "show('block','5')" >
                 <span class = "no_hightlight" style = "margin-left: 10px; font-size: 2.8vmin;">Підписники: </span>
                      <?php
                          $getFollowers = mysqli_query($link, "SELECT  * FROM followers INNER JOIN users ON followers.id_follower = users.id where id_user_follow = '$id'");
@@ -132,14 +132,14 @@
         <div class = "d-flex flex-column">
             <div class = "button_main mr-auto">
                 <a href = "index.php?action=edit">
-                  <span class = "no_hightlight " style = "font-size: 2.8vmin;">Редагувати профіль</span>
+                  <span class = "no_hightlight clickProfileBtn" style = "font-size: 2.8vmin;">Редагувати профіль</span>
                 </a>
             </div>
             <div onclick = "show('block','3')" class = "followers  mr-auto" style = "font-size: 2.8vmin;">
-                <span class = "no_hightlight counterClick" style = "font-size: 2.8vmin;">Добавити пост</span>
+                <span class = "no_hightlight counterClick clickProfileBtn" style = "font-size: 2.8vmin;">Добавити пост</span>
             </div>
             <div  onclick = "show('block','4')" class = "followers  mr-auto">
-                <span class = "no_hightlight counterClick" style = "font-size: 2.8vmin;" >Змінити аватар</span>
+                <span class = "no_hightlight counterClick clickProfileBtn" style = "font-size: 2.8vmin;" >Змінити аватар</span>
             </div>
         </div>
      </div>
@@ -152,7 +152,7 @@
           <div class = "input-group">
               <div class = "custom-file">
                   <input type = "file" name = "uploadfile" class = "custom-file-input" id = "inputGroupFile01" aria-describedby = "inputGroupFileAddon01">
-                  <label class = "custom-file-label" for = "inputGroupFile01">Choose file</label>
+                  <label class = "custom-file-label" for = "inputGroupFile01">Вибрати</label>
               </div>
           </div>
           <input type = "submit" name = "addFoto" value = "Добавити фото" class = "btn btn-light ml-auto" style = "width: 100%; margin-top: 2%;"/>
@@ -166,7 +166,7 @@
           <div class = "input-group">
               <div class = "custom-file">
                   <input type = "file" name = "uploadfile" class = "custom-file-input" id = "inputGroupFile01" aria-describedby = "inputGroupFileAddon01">
-                  <label class = "custom-file-label" for = "inputGroupFile01">Choose file</label>
+                  <label class = "custom-file-label" for = "inputGroupFile01">Вибрати</label>
               </div>
           </div>
           <input type = "submit" name = "addAvatar" value = "Змінити" class = "btn btn-light ml-auto" style = "width: 100%; margin-top: 2%;"/>
@@ -196,14 +196,14 @@
         ?>
     </div>
 </div> 
-<div class = "d-flex flex-row flex-wrap justify-content-around" id = "foto">
+<div class = "d-flex flex-row flex-wrap justify-content-start p-4" id = "foto">
     <?php 
         $getFoto = mysqli_query($link, "SELECT image_name, image_id FROM imggallery where iduser = '$id' LIMIT 6");
         $numFoto = mysqli_num_rows($getFoto);
 
         if ($numFoto == 0)
         {
-          echo '<div style = "height: 40%"><span style = "font-size: 4em;">Немає фото</span></div>';
+          echo '<div style = "height: 40%; margin-left: 32%;"><span style = "font-size: 4em;">Немає фото</span></div>';
         }
         else
         {
@@ -215,9 +215,9 @@
             $fotos[] = $rowFoto;
           }
           foreach ($fotos as $foto): 
-            echo '<div style = "margin-top: 20px;">
+            echo '<div style = " margin: 2%;">
                       <a href = "index.php?action=viewpost&idPost='.$foto['image_id'].'" >
-                        <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = " object-fit: cover;">
+                        <img src = "./fotopost/'.$foto['image_name'].' " width = "300px" height = "300px" style = "object-fit: cover;">
                       </a> 
                   </div>';
           endforeach; 

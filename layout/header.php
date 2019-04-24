@@ -13,4 +13,4 @@
 	
 <body>
     <div  class = "d-flex flex-column h-100" style = "margin-left: 10%; margin-right: 10%">
-        <div  class = "d-flex justify-content-between flex-row" style = "border-bottom: 1px solid silver;">
+        <div  class = "d-flex justify-content-between flex-row" id = "header">

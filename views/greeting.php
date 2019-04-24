@@ -1,5 +1,5 @@
 <div class = "d-flex flex-row-reverse justify-content-between flex-wrap">
-    <div class = "border rounded form-group col-sm-6 h-75" style = "margin-top: 20px;">
+    <div class = "border rounded form-group col-sm-6" style = "margin-top: 20px; height: 80%;">
         <?php
             if ( isset( $_POST['register'] ) )
             {
@@ -95,8 +95,8 @@
            <input class = "form-control" id = "passwordText" name = "password" size = "32" type = "password" value = "">
            <label class = "no_hightlight" for = "repeatPasswordText">Підтвердіть пароль</label>
            <input class = "form-control" id = "repeatPasswordText" name = "repeat_password" size = "32" type = "password" value = "">
-           <button class = "btn btn-default" name = "register" type = "submit">Зареєструватись</button>
-      </form>
+           <button class = "btn btn-light" name = "register" type = "submit">Зареєструватись</button>
+    </form>
     </div>
     <img src = "./img/greeting.png"  class = "greetingFoto col-sm-6 h-75" style = "object-fit: contain; margin-top: 20px;">
 </div>

@@ -25,8 +25,8 @@
       {
         $errorsComment = [];
 
-        $regComment = '/(([a-zA-Z0-9]{4,255})|([а-яё0-9]{4,255})|([абвгґдеєжзиіїйклмнопрстуфхцчшщьюяы0-9]{4,255}))/';//ДОРОБИТИ
-        $comment    = $_POST['comment'];
+        $regComment = '/(([a-zA-Z0-9]{4,255})|([а-яё0-9]{4,255})|([абвгґдеєжзиіїйклмнопрстуфхцчшщьюяы0-9]{4,255}))/';
+        $comment    = trim($_POST['comment']);
 
         if ( !preg_match($regComment, $comment) )
         {
@@ -134,7 +134,7 @@
                             {
                               echo '<button class = "like active" id = "dislike"></button>';
                             }
-                            echo '<div onclick = "show(\'block\',\'6\')" style = "margin-top:10px;" ">
+                            echo '<div onclick = "show(\'block\',\'6\')" style = "margin-top:10px;" class = "clickProfileBtn">
                                       <span style = "margin-top:10px;">Вподобали: </span>
                                       <span id = "counter" class = "no_hightlight">'.$numRows.'</span>
                                   </div>';
